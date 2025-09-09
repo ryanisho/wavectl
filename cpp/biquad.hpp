@@ -25,6 +25,9 @@ struct Biquad
     }
 };
 
+// ===== RBJ Cookbook Filter Design Functions =====
+
+// Low-shelf filter
 inline void design_low_shelf(double fs, double fc, double gain_db, Biquad &biq)
 {
     double A = std::pow(10.0, gain_db / 40.0);
@@ -44,7 +47,8 @@ inline void design_low_shelf(double fs, double fc, double gain_db, Biquad &biq)
     biq.set(b0, b1, b2, a0, a1, a2);
 }
 
-inline void design_high_shelf(double fs, double fc, double gain_db, Biquad &biq)
+// Peaking filter
+inline void design_peak(double fs, double fc, double q, double gain_db, Biquad &biq)
 {
     double A = std::pow(10.0, gain_db / 40.0);
     double w0 = 2 * M_PI * fc / fs;
@@ -62,7 +66,8 @@ inline void design_high_shelf(double fs, double fc, double gain_db, Biquad &biq)
     biq.set(b0, b1, b2, a0, a1, a2);
 }
 
-inline void design_peak(double fs, double fc, double Q, double gain_db, Biquad &biq)
+// High-shelf filter
+inline void design_high_shelf(double fs, double fc, double gain_db, Biquad &biq)
 {
     double A = std::pow(10.0, gain_db / 40.0);
     double w0 = 2 * M_PI * fc / fs;
